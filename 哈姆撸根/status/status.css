@@ -1,0 +1,164 @@
+
+ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    height: 1000px;
+    width: 200px;
+    background-color: #f1f1f1;
+}
+li{
+    width: 200px;
+    height: 50px;
+    background-color:#f1f1f1;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+}
+li a:hover{
+    background-color: rgb(90, 87, 87);
+    color: white;
+}
+a
+{
+    display:block;
+    width: 168px
+}
+li a {
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+li a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+p {
+    position:absolute;
+    left: 230px;
+    top: 10px;
+}
+p.p2 {
+    position:absolute;
+    left: 230px;
+    top: 400px;
+}
+#box{
+    position:absolute;
+    left: 230px;
+    top: 50px;
+    width: 1500px;
+    height:300px;
+    border:1px solid #F00
+}
+#box2{
+    position:absolute;
+    left: 230px;
+    top: 450px;
+    width: 1500px;
+    height:300px;
+    border:1px solid #FFD306
+}
+div.box1{
+    position:absolute;
+    left: 10px;
+    top: 55px;
+    width: 1300px;
+    height:50px;
+    border:1px solid #F00
+}
+div.box2{
+    position:absolute;
+    left: 10px;
+    top: 128px;
+    width: 1300px;
+    height:50px;
+    border:1px solid #F00
+}
+div.box3{
+    position:absolute;
+    left: 10px;
+    top: 200px;
+    width: 1300px;
+    height:50px;
+    border:1px solid #F00
+}
+div.box4{
+    top: 300px;
+    border:1px solid #F00
+}
+.box5{
+    top: 700px;
+    border:1px solid #F00
+}
+.box6{
+    top: 700px;
+    left: 400px;
+}
+div.ser{
+    position:absolute;
+    left: 420px; 
+    top:70px;
+}
+div.ser2{
+    position:absolute;
+    left: 850px; 
+    top:70px;
+}
+div.ser3{
+    position:absolute;
+    left: 420px; 
+    top:140px;
+}
+div.ser4{
+    position:absolute;
+    left: 850px; 
+    top:140px;
+}
+div.ser5{
+    position:absolute;
+    left: 420px; 
+    top:210px;
+}
+div.ser6{
+    position:absolute;
+    left: 850px; 
+    top:210px;
+}
+p.sname{
+    position:absolute;
+    left: 10px;
+    top: 10px;
+    
+}
+p.status{
+    position:absolute;
+    left: 400px;
+    top: 10px;
+}
+p.app{
+    position:absolute;
+    left: 800px;
+    top: 10px;
+}
+/**/
+button.edit{
+    position:absolute;
+    left: 1000px;
+    top: 70px;
+}
+button.edit2{
+    position:absolute;
+    left: 1000px;
+    top: 140px;
+}
+button.edit3{
+    position:absolute;
+    left: 1000px;
+    top: 210px;
+}
+
+/*按钮*/
+

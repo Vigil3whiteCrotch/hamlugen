@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>通过JS动态渲染JSON数据</title>
+    <link rel="stylesheet" type="text/css" href="../firewall/firewall.css">
+    <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+    <script>
+        function open_new(test) {
+            window.alert(test + ".html");
+            window.location.href = test + ".html";
+        }
+        window.onload = function() {
+            $.get('view.php', function(data){
+                var data = eval('('+data+')');
+                // var data = $.parseJSON(data);
+                // window.alert(data);
+                // alert(data);
+                // window.alert(data);
+                // data.forEach(temp => {});
+                var content = "";
+                for (var key in data) {
+                    // alert(key + " " + data[key]);
+                    content += "<tr>";
+                    content += "<td>" + key + "</td>";
+                    content += "<td>" + data[key] + "</td>";
+                    // " + key + "
+                    content += "<td><button onclick=\"open_new(\'" + key + "\')\">管理</button></td>";
+                    content += "</tr>";
+                }
+                $("#aTable").append(content);
+            });
+        }
+    </script>
+</head>
+<body>
+<!--导航栏-->
+    <ul>
+        <li><a class="active">linux资源检测系统</a></li>
+        <li><a href="../firewall/view.html">防火墙监测</a></li>
+        <li><a href="../status/status.html">应用状态</a></li>
+        <li><a href="../setting/setting.html">服务设置</a></li>
+        <li><a href="../runing/runing.html">服务运行状态</a></li>
+        <li><a href="../log/log.html">安装日志</a></li>
+    </ul>
+    <table id="aTable">
+        <tr>
+            <td><h4>firewalld</h4></td>
+            <td><h4>详细信息</h4></td>
+            <td><h4>管理</h4></td>
+        </tr>
+    </table>
+</body>
+</html>

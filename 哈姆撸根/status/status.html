@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>服务状态</title>
+    <link rel="stylesheet" type="text/css" href="../status/status.css">
+</head>
+<body>
+<!--导航栏-->
+    <ul>
+        <li><a class="active">linux资源检测系统</a></li>
+        <li><a href="../firewall/view.html">防火墙监测</a></li>
+        <li><a href="../status/status.html">应用状态</a></li>
+        <li><a href="../setting/setting.html">服务设置</a></li>
+        <li><a href="../runing/runing.html">服务运行状态</a></li>
+        <li><a href="../log/log.html">安装日志</a></li>
+    </ul>
+<!--应用部署页面-->
+<p>--状态栏--</p>
+<div id="box">
+    <p class="sname">服务名称</p>
+    <div class="box1">LAMPP</div>
+        <div class="ser">a</div>
+        <div class="ser2">b</div>
+
+    <div class="box2">LNMP</div>
+        <div class="ser3">a</div>
+        <div class="ser4">b</div>
+    <div class="box3">Java</div>
+        <div class="ser5">a</div>
+         <div class="ser6">b</div>
+        <p class="status">服务状态</p>
+        <p class="app">服务中部署的应用</p>
+    <button class="edit">编辑</button>
+    <button class="edit2">编辑</button>
+    <button class="edit3">编辑</button>
+</div>
+<p class="p2">--应用部署栏--</p>
+<div id="box2">
+    <div class="box4">服务名称</div>
+    <select class="box5">
+        <option value="LAMPP">LAMPP</option>
+        <option value="LNMP">LNMP</option>
+        <option value="Java">Java</option>
+      </select> 
+      <button class="box6">部署</button>     
+    </div>
+    <button>新建服务</button>
+</body>
+</html>
