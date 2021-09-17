@@ -1,0 +1,58 @@
+ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    height: 1000px;
+    width: 200px;
+    background-color: #f1f1f1;
+}
+li{
+    width: 200px;
+    height: 50px;
+    background-color:#f1f1f1;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+}
+li a:hover{
+    background-color: rgb(90, 87, 87);
+    color: white;
+}
+a
+{
+    display:block;
+    width: 168px
+}
+li a {
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+li a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+li a.logout {
+    background-color: rgb(90, 87, 87);
+    color: white;
+}
+li a.logout:hover{
+    background-color: red;
+    color: white;
+}
+/*上面是导航栏样式*/
+table {
+    position:absolute;
+    left: 250px;
+    top: 70px;
+    width: 800px;
+    margin: auto;
+    border: solid 1px rgb(70, 250, 241);
+    border-spacing: 0px;
+}
+td {
+    border: solid 1px gray;
+    height: 30px;
+}
