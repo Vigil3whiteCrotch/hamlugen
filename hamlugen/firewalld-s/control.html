@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>防火墙检测</title>
+    <style>
+        table {
+            width: 800px;
+            margin: auto;
+            border: solid 1px rgb(70, 250, 241);
+            border-spacing: 0px;
+        }
+        td {
+            border: solid 1px gray;
+            height: 30px;
+        }
+        #aTable {
+            margin-top: 2px;
+        }
+    </style>
+    <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+    <script>
+        // --permanent配置后需要reload
+        function open_new(key) {
+            // window.alert(key + ".html");
+            if (key == "target" || key == "icmp-block-inversion" || key == "interfaces" || key == "sources" || key == "protocols" || key == "source-ports" || key == "icmp-blocks") {
+                alert("coming soon");
+                return false;
+            }
+            else if (key == "forward-ports") {
+                var masObj = document.getElementById("masqueradeValue");
+                var masValue = masObj.innerText;
+                if (masValue == "no") {
+                    alert("要使用端口转发功能必须先开启masquerade");
+                    return false;
+                }
+            }
+            window.location.href = key + ".html";
+        }
+        function do_action(action) {
+            var param = "action=" + action;
+            $.post("control.php", param, function(data){
+                if (data == 'success') {
+                    location.reload();
+                }
+            });
+        }
+        window.onload = function() {
+            $.get('control.php?', function(data){
+                // var data = eval('('+data+')');
+                var data = $.parseJSON(data);
+                var source ="";
+                source += "<tr>";
+                source += '<td width="37%"><h4>firewalld</h4></td>';
+                source += '<td width="55%"><h4>详细信息</h4></td>';
+                source += '<td width="8%"><h4>管理</h4></td>';
+                source += "</tr>";
+                var content = "";
+                for (var key in data) {
+                    content += "<tr>";
+                    content += "<td id=\"" + key + "\" onmousemove=\"over_td(\'" + key + "\')\" onmouseout=\"out_td(\'" + key + "\')\">" + key + "</td>";
+                    content += "<td id=\"" + key + "Value\">" + data[key] + "</td>";
+                    content += "<td><button onclick=\"open_new(\'" + key + "\')\">管理</button></td>";
+                    content += "</tr>";
+                }
+                $("#aTable").append(source);
+                $("#aTable").append(content);
+            });
+        }
+        function over_td(objId) {
+            var obj = document.getElementById(objId);
+            if (objId == 'zone') {
+                obj.innerText = "当前正在使用的区域";
+            }
+            if (objId == 'target') {
+                obj.innerText = "目标";
+            }
+            if (objId == 'icmp-block-inversion') {
+                obj.innerText = "ICMP协议类型黑白名单开关(yes/no)";
+            }
+            if (objId == 'interfaces') {
+                obj.innerText = "网卡";
+            }
+            if (objId == 'sources') {
+                obj.innerText = "来源，可以是IP地址,也可以是mac地址";
+            }
+            if (objId == 'services') {
+                obj.innerText = "允许的服务";
+            }
+            if (objId == 'ports') {
+                obj.innerText = "允许的目标端口,即本地开放的端口";
+            }
+            if (objId == 'protocols') {
+                obj.innerText = "允许通过的协议";
+            }
+            if (objId == 'masquerade') {
+                obj.innerText = "是否允许伪装(yes/no),可改写来源IP地址及mac地址";
+            }
+            if (objId == 'forward-ports') {
+                obj.innerText = "允许转发的端口";
+            }
+            if (objId == 'source-ports') {
+                obj.innerText = "允许的来源端口";
+            }
+            if (objId == 'icmp-blocks') {
+                obj.innerText = "可添加ICMP类型,当icmp-block-inversion为no时,这些ICMP类型被拒绝;当icmp-block-inversion为yes时,这些ICMP类型被允许.";
+            }
+            if (objId == 'rich rules') {
+                obj.innerText = "富规则,即更细致、更详细的防火墙规则策略,它的优先级在所有的防火墙策略中也是最高的.";
+            }            
+        }
+        function out_td(objId) {
+            var obj = document.getElementById(objId);
+            obj.innerText = objId;
+        }
+    </script>
+</head>
+<body>
+    <table id="bTable">
+        <tr>
+            <td colspan="2" align="center"><h4>常用的操作指令</h4></td>
+            <td>面板刷新</td>
+            <td><button onclick="do_action('flush')">确认</button></td>
+            <td>firewalld重载</td>
+            <td><button onclick="do_action('reload')">确认</button></td>
+        </tr>
+        <tr>
+            <td>启动firewalld</td>
+            <td><button onclick="do_action('start')">确认</button></td>
+            <td>关闭firewalld</td>
+            <td><button onclick="do_action('stop')">确认</button></td>
+            <td>重启firewalld服务</td>
+            <td><button onclick="do_action('restart')">确认</button></td>
+        </tr>
+        <tr>
+            <td>firewalld开机自启动</td>
+            <td><button onclick="do_action('enable')">确认</button></td>
+            <td>关闭firewalld自启动</td>
+            <td><button onclick="do_action('disable')">确认</button></td>
+            <td>firewalld紧急模式</td>
+            <td><button onclick="do_action('panic')">确认</button></td>
+        </tr>
+    </table>
+    <table id="aTable">
+        <tr>
+
+        </tr>
+    </table>
+</body>
+</html>

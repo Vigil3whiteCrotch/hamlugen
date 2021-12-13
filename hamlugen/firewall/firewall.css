@@ -1,0 +1,90 @@
+ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    height: 1000px;
+    width: 200px;
+    background-color: #f1f1f1;
+}
+li{
+    width: 200px;
+    height: 50px;
+    background-color:#f1f1f1;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+}
+li a:hover{
+    background-color: rgb(90, 87, 87);
+    color: white;
+}
+a
+{
+    display:block;
+    width: 168px
+}
+li a {
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+li a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+li a.logout {
+    background-color: rgb(90, 87, 87);
+    color: white;
+}
+li a.logout:hover{
+    background-color: red;
+    color: white;
+}
+/*导航栏*/
+table {
+    position:absolute;
+    width: auto;
+    left: 250px;
+    top: 70px;
+    margin: auto;
+    border: solid 1px #4CAF50;
+    border-spacing: 0px;
+    display: table-cell;
+}
+td {
+    border: solid 1px gray;
+    height: 30px;
+}
+#aTable {
+    margin-top: 10px;
+}
+#bTable{
+    width: 1200px; 
+    margin-top: 150px;
+}
+table.c
+{
+    position:absolute;
+    top: 230px;
+    width: 900px;
+}
+/*表格*/
+
+button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 4px 23px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 0px 1px;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #3e8e41;
+}
+/*按钮*/

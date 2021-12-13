@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>区域管理</title>
+    <style>
+        table {
+            width: 400px;
+            margin: auto;
+            border: solid 1px rgb(70, 250, 241);
+            border-spacing: 0px;
+        }
+        td {
+            border: solid 1px gray;
+            height: 30px;
+        }
+    </style>
+    <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+    <script>
+        function do_action() {
+            var obj = document.getElementById("zoneSelect");
+            var value = obj.options[obj.options.selectedIndex].value;
+            // window.alert(value);
+            var param = "ip=1";
+            $.post("set.php", param, function(data){
+                alert(data);
+            });
+        }
+        function do_back() {
+            window.location.href = "control.html";
+        }
+    </script>
+</head>
+<body>
+    <table id="aTable">
+        <tr>
+            <td width="50%"><h4>区域选择</h4></td>
+            <td width="50%"><h4>操作</h4></td>
+        </tr>
+        <tr>
+            <td>
+                <select id="zoneSelect" οnchange="getSelectValue(this);">
+                    <option value="blcok">blcok</option>
+                    <option value="dmz">dmz</option>
+                    <option value="docker">docker</option>
+                    <option value="drop">drop</option>
+                    <option value="external">external</option>
+                    <option value="home">home</option>
+                    <option value="internal">internal</option>
+                    <option selected value="public">public</option>
+                    <option value="trusted">trusted</option>
+                    <option value="work">work</option>
+                </select>
+            </td>
+            <td>
+                <button onclick="do_action()">确认</button>
+                <button onclick="do_back()">返回控制面板</button>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

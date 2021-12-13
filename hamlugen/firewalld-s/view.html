@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>防火墙检测</title>
+    <style>
+        table {
+            width: 800px;
+            margin: auto;
+            border: solid 1px rgb(70, 250, 241);
+            border-spacing: 0px;
+        }
+        td {
+            border: solid 1px gray;
+            height: 30px;
+        }
+    </style>
+    <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+    <script>
+        function open_new(test) {
+            window.alert(test + ".html");
+            window.location.href = test + ".html";
+        }
+        window.onload = function() {
+            $.get('view.php', function(data){
+                var data = eval('('+data+')');
+                // var data = $.parseJSON(data);
+                // window.alert(data);
+                // alert(data);
+                // window.alert(data);
+                // data.forEach(temp => {});
+                var content = "";
+                for (var key in data) {
+                    // alert(key + " " + data[key]);
+                    content += "<tr>";
+                    content += "<td>" + key + "</td>";
+                    content += "<td>" + data[key] + "</td>";
+                    // " + key + "
+                    content += "<td><button onclick=\"open_new(\'" + key + "\')\">管理</button></td>";
+                    content += "</tr>";
+                }
+                $("#aTable").append(content);
+            });
+        }
+    </script>
+</head>
+<body>
+    <table id="aTable">
+        <tr>
+            <td><h4>firewalld</h4></td>
+            <td><h4>详细信息</h4></td>
+            <td><h4>管理</h4></td>
+        </tr>
+    </table>
+</body>
+</html>

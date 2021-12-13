@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>富规则配置</title>
+    <style>
+        table {
+            width: 800px;
+            margin: auto;
+            border: solid 1px rgb(70, 250, 241);
+            border-spacing: 0px;
+        }
+        td {
+            border: solid 1px gray;
+            height: 30px;
+        }
+    </style>
+    <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+    <script>
+        function do_back() {
+            window.location.href = "control.html";
+        }
+        function do_action(action) {
+            var ipv4Obj = document.getElementById("ipv4");
+            var ipv4Value = ipv4Obj.value;
+            var re = /((^25[0-5]\.)|(^2[0-4]\d\.)|(^[01]?\d\d?\.))((25[0-5]\.)|(2[0-4]\d\.)|([01]?\d\d?\.)){2}((25[0-5]$)|(2[0-4]\d$)|([01]?\d\d?$))/;
+            var reBool = re.test(ipv4Value);
+            if (reBool == false) {
+                alert("输入的IPv4地址有误，请检查");
+                return false;
+            }
+            var portObj = document.getElementById("port");
+            var portValue = portObj.value;
+            var portRe = /\b^\d*$\b/;
+            var portBool = portRe.test(portValue);
+            var protNum = Number(portValue);
+            if (portBool == false || protNum < 0 || protNum > 65535) {
+                alert("输入的端口号有误，请检查");
+                return false;
+            }
+            var protocolObj = document.getElementById("protocolSelect");
+            var protocolValue = protocolObj.options[protocolObj.options.selectedIndex].value;
+            if(!((portValue==protocolValue) || (portValue != '' && protocolValue !=''))) {
+                alert('端口号与协议需配合使用，都有或都无');
+                return false;
+            }
+            var zoneObj = document.getElementById("zoneSelect");
+            var zoneValue = zoneObj.options[zoneObj.options.selectedIndex].value;
+            var confObj = document.getElementById("confSelect");
+            var confValue = confObj.options[confObj.options.selectedIndex].value;
+            var dealObj = document.getElementById("dealSelect");
+            var dealValue = dealObj.options[dealObj.options.selectedIndex].value;
+            var param = "addr=" + ipv4Value + "&port=" + portValue + "&protocol=" + protocolValue + "&zone=" + zoneValue + "&conf=" + confValue + "&deal=" + dealValue + "&action=" + action;
+            
+            $.post("rich rules.php", param, function(data){
+                alert(data);
+            });
+        }
+    </script>
+</head>
+<body>
+    <table id="aTable">
+        <tr>
+            <td width="20%"><h4>IPv4地址</h4></td>
+            <td width="10%"><h4>区域</h4></td>
+            <td width="10%"><h4>端口</h4></td>
+            <td width="10%"><h4>协议</h4></td>
+            <td width="10%"><h4>处理</h4></td>
+            <td width="10%"><h4>期限</h4></td>
+            <td width="30%"><h4>操作</h4></td>
+        </tr>
+        <tr>
+            <td><input id="ipv4" type="text" placeholder="输入IPv4地址" value=''/></td>
+            <td>
+                <select id="zoneSelect">
+                    <option value="blcok">blcok</option>
+                    <option value="dmz">dmz</option>
+                    <option value="docker">docker</option>
+                    <option value="drop">drop</option>
+                    <option value="external">external</option>
+                    <option value="home">home</option>
+                    <option value="internal">internal</option>
+                    <option selected value="public">public</option>
+                    <option value="trusted">trusted</option>
+                    <option value="work">work</option>
+                </select>
+            </td>
+            <td><input id="port" type="text" style="width:80px" placeholder="默认为空" value=''/></td>
+            <td>
+                <select id="protocolSelect">
+                    <option selected value="">默认为空</option>
+                    <option value="tcp">TCP</option>
+                    <option value="udp">UDP</option>
+                </select>
+            </td>
+            <td>
+                <select id="dealSelect">
+                    <option selected value="accept">accept</option>
+                    <option value="reject">reject</option>
+                    <option value="drop">drop</option>
+                </select>
+            </td>
+            <td>
+                <select id="confSelect">
+                    <option selected value="">temp</option>
+                    <option value="permanent">permanent</option>
+                </select>
+            </td>
+            <td>
+                <button onclick="do_action('add')">添加</button>
+                <button onclick="do_action('remove')">移除</button>
+                <button onclick="do_back()">返回控制面板</button>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

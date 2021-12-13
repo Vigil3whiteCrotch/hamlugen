@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            background-color: aqua;
+        }
+    </style>
+<script>
+    function createDiv(_width, _height, _color) {
+        var str = "";
+        str += " <div style=' ";
+        str += "width:" + _width + "px;";
+        str += "height:" + _height + "px;";
+        str += "background-color:" + _color + ";";
+        str += "position:absolute;";
+        str += "left:" + Math.random() * 1000 + "px;";
+        str += "top:" + Math.random() * 600 + "px;";
+        str += "'></div>"
+        document.write(str);
+    }
+    function randomColor() {
+        var color = "#";
+        for (var i = 0; i < 6; i++) {
+            color += parseInt(Math.random() * 16).toString(16);
+        }
+        return color;
+    }
+    var w, c;
+    for (var i = 0; i < 50; i++) {
+        w = Math.random() * 50 + 50;
+        c = randomColor();
+        createDiv(w, w, c);
+    }
+</script>
+</head>
+<body>
+    <div class="giveYouColorSeeSee">1</div>
+    <div class="giveYouColorSeeSee">2</div>
+    <div class="giveYouColorSeeSee">3</div>
+    <div class="giveYouColorSeeSee">4</div>
+    <div class="giveYouColorSeeSee">5</div>
+    <div class="giveYouColorSeeSee">6</div>
+</body>
+</html>

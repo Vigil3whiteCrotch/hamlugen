@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>端口转发配置</title>
+    <style>
+        table {
+            width: 800px;
+            margin: auto;
+            border: solid 1px rgb(70, 250, 241);
+            border-spacing: 0px;
+        }
+        td {
+            border: solid 1px gray;
+            height: 30px;
+        }
+    </style>
+    <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+    <script>
+        function do_back() {
+            window.location.href = "control.html";
+        }
+        function do_action(action) {
+            var portObj = document.getElementById("port");
+            var portValue = portObj.value;
+            var portRe = /\b^\d*$\b/;
+            var portBool = portRe.test(portValue);
+            var protNum = Number(portValue);
+            if (portBool == false || protNum < 0 || protNum > 65535) {
+                alert("输入的端口号有误，请检查");
+                return false;
+            }
+
+            var dportObj = document.getElementById("dport");
+            var dportValue = dportObj.value;
+            var dportBool = portRe.test(dportValue);
+            var dportNum = Number(dportValue);
+            if (dportBool == false || dportNum < 0 || dportNum > 65535) {
+                alert("输入的目的端口号有误，请检查");
+                return false;
+            }
+
+            var ipv4Obj = document.getElementById("ipv4");
+            var ipv4Value = ipv4Obj.value;
+            var ipRe = /((^25[0-5]\.)|(^2[0-4]\d\.)|(^[01]?\d\d?\.))((25[0-5]\.)|(2[0-4]\d\.)|([01]?\d\d?\.)){2}((25[0-5]$)|(2[0-4]\d$)|([01]?\d\d?$))/;
+            var ipBool = ipRe.test(ipv4Value);
+            if (ipBool == false && ipv4Value != "") {
+                alert("输入的IPv4地址有误，请检查");
+                return false;
+            }
+
+            var protocolObj = document.getElementById("protocolSelect");
+            var protocolValue = protocolObj.options[protocolObj.options.selectedIndex].value;
+
+            var zoneObj = document.getElementById("zoneSelect");
+            var zoneValue = zoneObj.options[zoneObj.options.selectedIndex].value;
+            var confObj = document.getElementById("confSelect");
+            var confValue = confObj.options[confObj.options.selectedIndex].value;
+            var param = "addr=" + ipv4Value + "&port=" + portValue + "&protocol=" + protocolValue + "&dport=" + dportValue  + "&zone=" + zoneValue + "&conf=" + confValue  + "&action=" + action;
+            
+            $.post("forward-ports.php", param, function(data){
+                alert(data);
+            });
+        }
+    </script>
+</head>
+<body>
+    <table id="aTable">
+        <tr>
+            <td width="10%"><h4>区域</h4></td>
+            <td width="10%"><h4>本机端口</h4></td>
+            <td width="10%"><h4>协议</h4></td>
+            <td width="10%"><h4>目的端口</h4></td>
+            <td width="20%"><h4>目的IPv4地址</h4></td>
+            <td width="10%"><h4>期限</h4></td>
+            <td width="30%"><h4>操作</h4></td>
+        </tr>
+        <tr>
+            <td>
+                <select id="zoneSelect">
+                    <option value="blcok">blcok</option>
+                    <option value="dmz">dmz</option>
+                    <option value="docker">docker</option>
+                    <option value="drop">drop</option>
+                    <option value="external">external</option>
+                    <option value="home">home</option>
+                    <option value="internal">internal</option>
+                    <option selected value="public">public</option>
+                    <option value="trusted">trusted</option>
+                    <option value="work">work</option>
+                </select>
+            </td>
+            <td><input id="port" type="text" style="width:60px" placeholder="port" value=''/></td>
+            <td>
+                <select id="protocolSelect">
+                    <option selected value="tcp">TCP</option>
+                    <option value="udp">UDP</option>
+                </select>
+            </td>
+            <td><input id="dport" type="text" style="width:60px" placeholder="dport" value=''/></td>
+            <td><input id="ipv4" type="text" style="width:140px" placeholder="输入目的IP地址" value=''/></td>
+            <td>
+                <select id="confSelect">
+                    <option selected value="">temp</option>
+                    <option value="permanent">permanent</option>
+                </select>
+            </td>
+            <td>
+                <button onclick="do_action('add')">添加</button>
+                <button onclick="do_action('remove')">移除</button>
+                <button onclick="do_back()">返回控制面板</button>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

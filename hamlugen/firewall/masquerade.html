@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>伪装管理</title>
+    <link rel="stylesheet" type="text/css" href="../firewall/firewall.css">
+    <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+    <script>
+        function do_action(action) {
+            var zoneObj = document.getElementById("zoneSelect");
+            var zoneValue = zoneObj.options[zoneObj.options.selectedIndex].value;
+            var confObj = document.getElementById("confSelect");
+            var confValue = confObj.options[confObj.options.selectedIndex].value;
+            // window.alert(value);
+            var param = "action=" + action + "&conf=" + confValue + "&zone=" + zoneValue;
+            $.post("masquerade.php", param, function(data){
+                alert(data);
+            });
+        }
+        function do_back() {
+            window.location.href = "control.html";
+        }
+    </script>
+</head>
+<body>
+    <ul>
+        <li><a class="active">linux资源检测系统</a></li>
+        <li><a href="../firewall/control.html">防火墙监测</a></li>
+        <li><a href="../status/status.html">应用状态</a></li>
+        <li><a href="../setting/setting.html">服务设置</a></li>
+        <li><a href="../log/log.html">安装日志</a></li>
+        <li><a href="../test/docker.html">docker服务部署</a></li>
+        <li><a class="logout" href="../login/login.html">注销</a></li>
+    </ul>
+    <table id="aTable">
+        <tr>
+            <td width="25%"><h4>区域选择</h4></td>
+            <td width="25%"><h4>期限</h4></td>
+            <td width="50%"><h4>操作</h4></td>
+        </tr>
+        <tr>
+            <td>
+                <select id="zoneSelect">
+                    <option value="blcok">blcok</option>
+                    <option value="dmz">dmz</option>
+                    <option value="docker">docker</option>
+                    <option value="drop">drop</option>
+                    <option value="external">external</option>
+                    <option value="home">home</option>
+                    <option value="internal">internal</option>
+                    <option selected value="public">public</option>
+                    <option value="trusted">trusted</option>
+                    <option value="work">work</option>
+                </select>
+            </td>
+            <td>
+                <select id="confSelect">
+                    <option selected value="">temp</option>
+                    <option value="permanent">permanent</option>
+                </select>
+            </td>
+            <td>
+                <button onclick="do_action('add')">开启</button>
+                <button onclick="do_action('remove')">关闭</button>
+                <button onclick="do_back()">返回控制面板</button>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

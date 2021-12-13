@@ -1,0 +1,113 @@
+/*文本框*/
+p.install{
+    position:absolute;
+    left: 300px; 
+    font-family:"Times New Roman", Times, serif;
+    font-size:30px;
+}
+.box1{
+position:absolute;
+margin-top: 80px;
+left: 400px;
+}
+/*按钮和输出框设置*/
+.button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+.button:hover {
+    background-color: #3e8e41;
+}
+input.box1{
+    margin-top: 0px;
+    margin-left: -500px;
+    width: 1500px;
+    height: 500px;
+}
+input.button{
+    position:absolute;
+    top: 800px;
+    left: 1700px;
+}
+/*以下为导航栏渲染*/
+ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    height: 1000px;
+    width: 200px;
+    background-color: #f1f1f1;
+}
+li{
+    width: 200px;
+    height: 50px;
+    background-color:#f1f1f1;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+}
+li a:hover{
+    background-color: rgb(90, 87, 87);
+    color: white;
+}
+a
+{
+    display:block;
+    width: 168px
+}
+li a {
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+li a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+li a.logout {
+    background-color: rgb(90, 87, 87);
+    color: white;
+}
+li a.logout:hover{
+    background-color: red;
+    color: white;
+}
+/*进度条*/
+#progress1{
+    position: relative;
+    bottom: 350px; 
+    left: 290px;
+    width: 1510px;
+    height: 20px;
+    background: #dfdfdf;
+  }
+/*进度条渲染动画*/
+  @keyframes aw{
+    from{
+      width: 0
+    }
+    to{
+      width: 100%
+    }
+  }
+#progress1:before{
+    position: absolute;
+    width: 20%;
+    height: 100%;
+    background: #4CAF50;
+    content: '这是一个进度条';
+    color: #fff;
+    font-size: 12px;
+    text-align: center;
+     animation: aw 240s infinite;;
+  }

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>服务状态</title>
+    <link rel="stylesheet" type="text/css" href="../log/log.css">
+    <script>
+        setInterval(function () { //每5秒刷新一次图表
+         //需要执行的代码写在这里
+         // var ele = document.getElementById("test");
+         // //判断元素是否出现了滚动条
+         // if(ele.scrollHeight > ele.clientHeight) {
+         //     //设置滚动条到最底部
+         //     ele.scrollTop = ele.scrollHeight;
+         // }
+         iFrame.scrollBy(0,99999999);
+     }, 1000); 
+     function goMain() {
+        window.location.href="../firewall/control.html";
+     }
+     </script>
+</head>
+<body>
+<!--输出文本框-->
+    <form>
+        <p class="install">安装日志</h1></p>
+        <div class="box1">
+            <iframe id="iFrame" name="iFrame" src="log.php" frameborder="1" style="width: 1300px;height: 500px;"></iframe>
+        </div>
+        <input class="button" type="button" value="返回" onclick="goMain()">
+    </form>
+<!--导航栏-->
+    <ul>
+        <li><a class="active">linux资源检测系统</a></li>
+        <li><a href="../firewall/control.html">防火墙监测</a></li>
+        <li><a href="../status/status.html">应用状态</a></li>
+        <li><a href="../setting/setting.html">服务设置</a></li>
+        <li><a href="../log/log.html">安装日志</a></li>
+        <li><a href="../test/docker.html">docker服务部署</a></li>
+        <li><a class="logout" href="../login/login.html">注销</a></li>
+    </ul>
+<!--进度条-->
+<div class="progress" id="progress1"></div>
+    <script>
+    </script>
+</body>
+</html>

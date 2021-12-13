@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>服务配置</title>
+    <link rel="stylesheet" type="text/css" href="../firewall/firewall.css">
+    <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+    <script>
+        function do_back() {
+            window.location.href = "control.html";
+        }
+        function do_action(action) {
+            var serviceObj = document.getElementById("service");
+            var serviceValue = serviceObj.value;
+            if (serviceValue == '') {
+                alert("服务名称不能为空");
+                return false;
+            }
+            var zoneObj = document.getElementById("zoneSelect");
+            var zoneValue = zoneObj.options[zoneObj.options.selectedIndex].value;
+            var confObj = document.getElementById("confSelect");
+            var confValue = confObj.options[confObj.options.selectedIndex].value;
+            var param = "service=" + serviceValue + "&zone=" + zoneValue + "&conf=" + confValue + "&action=" + action;
+            $.post("services.php", param, function(data){
+                alert(data);
+            });
+        }
+        function randomColor() {
+            var color = "#";
+            for (var i = 0; i < 6; i++) {
+                color += parseInt(Math.random() * 16).toString(16);
+            }
+            return color;
+        }
+        function hover_div(name) {
+            var div = document.getElementById(name);
+            var mcolor = randomColor();
+            div.style.backgroundColor=mcolor;
+        }
+        function click_div(value) {
+            var obj = document.getElementById("service");
+            obj.value = value;
+        }
+        window.onload = function() {
+            $.get('services.php?request=yes', function(data){
+                // var data = eval('('+data+')');
+                // alert(data);
+                var data = $.parseJSON(data);
+                var str = '<div id="aDiv">';
+                // var str = '';
+                data.forEach(temp => {
+                    var rcolor = randomColor();
+                    
+                    str += " <div id=\""+ temp + "\" style=' ";
+                    // str += " <div style=' ";
+                    str += "background-color: "+ rcolor +";";
+                    str += "color: white;";
+                    str += "float: left;";
+                    str += "margin: 10px;";
+                    str += "padding: 4px;";
+                    str += "\' onclick=\"click_div(\'" + temp + "\')\""
+                    str += "\' onmouseover=\"hover_div(\'" + temp + "\')\""
+                    str += ">";
+                    str += temp;
+                    str += "</div>";                
+                });
+                str += "</div>";
+                $("#bTable").append(str);
+                // document.write(str);
+            });
+            // var obj = document.getElementById("zoneSelect");
+            // var value = obj.options[obj.selectedIndex].value;
+            // alert(value);
+        }
+    </script>
+</head>
+<body>
+    <!--导航栏-->
+    <ul>
+        <li><a class="active">linux资源检测系统</a></li>
+        <li><a href="../firewall/control.html">防火墙监测</a></li>
+        <li><a href="../status/status.html">应用状态</a></li>
+        <li><a href="../setting/setting.html">服务设置</a></li>
+        <li><a href="../log/log.html">安装日志</a></li>
+        <li><a href="../test/docker.html">docker服务部署</a></li>
+        <li><a class="logout" href="../login/login.html">注销</a></li>
+    </ul>
+    <table>
+        <tr>
+            <td width="30%"><h4>服务</h4></td>
+            <td width="20%"><h4>区域</h4></td>
+            <td width="20%"><h4>期限</h4></td>
+            <td width="30%"><h4>操作</h4></td>
+        </tr>
+        <tr>
+            <td><input id="service" type="text" placeholder="输入服务名称或点击提示块" value='' /></td>
+            <td>
+                <select id="zoneSelect">
+                    <option value="blcok">blcok</option>
+                    <option value="dmz">dmz</option>
+                    <option value="docker">docker</option>
+                    <option value="drop">drop</option>
+                    <option value="external">external</option>
+                    <option value="home">home</option>
+                    <option value="internal">internal</option>
+                    <option selected value="public">public</option>
+                    <option value="trusted">trusted</option>
+                    <option value="work">work</option>
+                </select>
+            </td>
+            <td>
+                <select id="confSelect">
+                    <option selected value="">temp</option>
+                    <option value="permanent">permanent</option>
+                </select>
+            </td>
+            <td>
+                <button onclick="do_action('add')">添加</button>
+                <button onclick="do_action('remove')">移除</button>
+                <button onclick="do_back()">返回控制面板</button>
+            </td>
+        </tr>
+    </table>
+    <table id="bTable">
+        <tr>
+
+        </tr>
+    </table>
+</body>
+</body>
+</html>
